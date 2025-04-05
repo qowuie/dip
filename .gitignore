@@ -1,0 +1,59 @@
+# Исключаем виртуальное окружение
+venv/
+ENV/
+env/
+.venv/
+
+# Исключаем временные файлы Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Исключаем локальные данные Django
+db.sqlite3
+media/
+staticfiles/
+
+# Исключаем IDE-файлы
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Исключаем локальные настройки
+.env
+.env.local
+.env.*.local
+
+# Исключаем файлы операционной системы
+.DS_Store
+Thumbs.db
+
+# Исключаем Docker-файлы (если они генерируются автоматически)
+docker-compose.override.yml
+
+# Исключаем папки сборки и кэша
+build/
+dist/
+*.egg-info/
+.cache/
+.tox/
+.coverage
+.htmlcov/
+.pytest_cache/
+.mypy_cache/
+
+# Исключаем файлы логов
+*.log
+log/*.log
+
+# Исключаем файлы миграций (если вы хотите их игнорировать)
+# migrations/
+# !migrations/__init__.py
+
+# Исключаем секретные ключи и токены
+*.key
+*.pem
+*.crt
+*.csr
+*.pfx

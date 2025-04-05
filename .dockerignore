@@ -1,0 +1,22 @@
+# Исключаем временные файлы Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Исключаем Git
+.git/
+.gitignore
+
+# Исключаем IDE-файлы
+.vscode/
+.idea/
+
+# Исключаем локальные данные Django
+db.sqlite3
+media/
+staticfiles/
+
+# Исключаем другие ненужные файлы
+.env
+.DS_Store
