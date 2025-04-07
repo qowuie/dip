@@ -1,8 +1,8 @@
 # orders/models.py
 
 from django.db import models
-from ..accounts.models import CustomUser
-from ..main.models import Service
+from accounts.models import CustomUser
+from main.models import Service
 
 
 class Order(models.Model):

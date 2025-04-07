@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import ServiceCategory, Service
 
+
 def home(request):
     """Главная страница с услугами и их категориями."""
     categories = ServiceCategory.objects.all()

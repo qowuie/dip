@@ -10,11 +10,11 @@ def create_order(request):
         form = OrderForm(request.POST)
         if form.is_valid():
             order = form.save(commit=False)
-            order.user = request.user
+            order.client = request.user  # Присваиваем клиента
             order.save()
             return redirect('order_success')
     else:
-        form = OrderForm()
+        form = OrderForm(initial={'client': request.user})  # Передаем пользователя в форму через initial
     return render(request, 'orders/create_order.html', {'form': form})
 
 

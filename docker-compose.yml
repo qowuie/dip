@@ -9,6 +9,7 @@ services:
     depends_on:
       - db
     environment:
+      - PYTHONPATH=/app
       - DEBUG=True
       - DJANGO_DB_NAME=your_db_name
       - DJANGO_DB_USER=your_db_user
@@ -27,6 +28,8 @@ services:
       - postgres_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
+    networks:
+      - app-network
 
 volumes:
   postgres_data:

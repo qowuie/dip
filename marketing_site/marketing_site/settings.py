@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -57,7 +58,7 @@ ROOT_URLCONF = 'marketing_site.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -78,10 +79,10 @@ WSGI_APPLICATION = 'marketing_site.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'marketing_db',       # Название базы данных
+        'NAME': 'marketing_db',       # Имя базы данных
         'USER': 'postgres',           # Имя пользователя
-        'PASSWORD': 'password',       # Пароль (изменится позже через Docker)
-        'HOST': 'db',                 # Хост (будет контейнер PostgreSQL)
+        'PASSWORD': 'password',       # Пароль
+        'HOST': 'db',                 # Хост (должен совпадать с именем сервиса в docker-compose.yml)
         'PORT': '5432',               # Порт PostgreSQL
     }
 }
@@ -122,6 +123,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
