@@ -3,6 +3,7 @@ from .forms import OrderForm
 from .models import Order
 from django.contrib.auth.decorators import login_required
 
+
 @login_required
 def create_order(request):
     if request.method == 'POST':
@@ -15,6 +16,7 @@ def create_order(request):
     else:
         form = OrderForm()
     return render(request, 'orders/create_order.html', {'form': form})
+
 
 @login_required
 def order_success(request):

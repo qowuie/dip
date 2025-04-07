@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Профиль{% endblock %}
+
+{% block content %}
+<h2 class="text-xl font-semibold mb-4">Мои заказы</h2>
+
+{% if orders %}
+    <div class="space-y-4">
+        {% for order in orders %}
+            <div class="bg-white p-4 rounded-xl shadow">
+                <h3 class="text-lg font-bold">{{ order.service.name }}</h3>
+                <p class="text-sm text-gray-600">{{ order.created_at|date:"d.m.Y H:i" }}</p>
+                <p><strong>Пожелания:</strong> {{ order.wishes }}</p>
+                <p><strong>Статус:</strong> 
+                    {% if order.status == "created" %} <span class="text-blue-600">Создан</span>
+                    {% elif order.status == "in_progress" %} <span class="text-yellow-600">В работе</span>
+                    {% elif order.status == "completed" %} <span class="text-green-600">Выполнен</span>
+                    {% endif %}
+                </p>
+                {% if user.role == 'employee' and order.executor %}
+                    <p><strong>Исполнитель:</strong> {{ order.executor.get_full_name }}</p>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <p>У вас пока нет заказов.</p>
+{% endif %}
+{% endblock %}

@@ -8,6 +8,14 @@ services:
       - "8000:8000"
     depends_on:
       - db
+    environment:
+      - DEBUG=True
+      - DJANGO_DB_NAME=your_db_name
+      - DJANGO_DB_USER=your_db_user
+      - DJANGO_DB_PASSWORD=your_db_password
+      - DJANGO_DB_HOST=db  # Указывает на сервис базы данных
+    networks:
+      - app-network
 
   db:
     image: postgres:14
@@ -17,6 +25,12 @@ services:
       POSTGRES_PASSWORD: password
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
 
 volumes:
   postgres_data:
+
+networks:
+  app-network:
+    driver: bridge

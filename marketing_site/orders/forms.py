@@ -30,7 +30,7 @@ class OrderForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(OrderForm, self).__init__(*args, **kwargs)
-        if self.instance and self.instance.user:
+        if self.instance and self.instance.client:
             # Автоматически заполняем данные из пользователя, если они есть
             self.fields['full_name'].initial = self.instance.user.get_full_name()
             self.fields['phone_number'].initial = self.instance.user.profile.phone_number if hasattr(self.instance.user, 'profile') else ''
