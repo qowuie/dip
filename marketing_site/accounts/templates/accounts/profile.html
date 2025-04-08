@@ -1,30 +1,22 @@
-{% extends "base.html" %}
-
+{% extends 'base.html' %}
 {% block title %}Профиль{% endblock %}
-
 {% block content %}
-<h2 class="text-xl font-semibold mb-4">Мои заказы</h2>
-
-{% if orders %}
-    <div class="space-y-4">
+<div class="min-h-screen bg-gray-100 py-10">
+  <div class="max-w-4xl mx-auto bg-white p-8 rounded-2xl shadow-md">
+    <h2 class="text-2xl font-bold mb-6">Мои заказы</h2>
+    {% if orders %}
+      <div class="space-y-4">
         {% for order in orders %}
-            <div class="bg-white p-4 rounded-xl shadow">
-                <h3 class="text-lg font-bold">{{ order.service.name }}</h3>
-                <p class="text-sm text-gray-600">{{ order.created_at|date:"d.m.Y H:i" }}</p>
-                <p><strong>Пожелания:</strong> {{ order.wishes }}</p>
-                <p><strong>Статус:</strong> 
-                    {% if order.status == "created" %} <span class="text-blue-600">Создан</span>
-                    {% elif order.status == "in_progress" %} <span class="text-yellow-600">В работе</span>
-                    {% elif order.status == "completed" %} <span class="text-green-600">Выполнен</span>
-                    {% endif %}
-                </p>
-                {% if user.role == 'employee' and order.executor %}
-                    <p><strong>Исполнитель:</strong> {{ order.executor.get_full_name }}</p>
-                {% endif %}
-            </div>
+          <div class="border border-gray-300 rounded-xl p-4">
+            <p><strong>Услуга:</strong> {{ order.service.name }}</p>
+            <p><strong>Статус:</strong> {{ order.get_status_display }}</p>
+            <p><strong>Создан:</strong> {{ order.created_at|date:"d.m.Y H:i" }}</p>
+          </div>
         {% endfor %}
-    </div>
-{% else %}
-    <p>У вас пока нет заказов.</p>
-{% endif %}
+      </div>
+    {% else %}
+      <p class="text-gray-600">У вас пока нет заказов.</p>
+    {% endif %}
+  </div>
+</div>
 {% endblock %}
