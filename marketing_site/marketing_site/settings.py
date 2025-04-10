@@ -41,7 +41,16 @@ INSTALLED_APPS = [
     'main',
     'accounts',
     'orders',
+    'api'
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',  # Только JSON (если не нужен browsable API)
+        #'rest_framework.renderers.BrowsableAPIRenderer',  # ← если хочешь красиво смотреть в браузере
+    )
+}
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -124,8 +133,6 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
