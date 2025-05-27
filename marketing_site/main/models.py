@@ -21,6 +21,7 @@ class Service(models.Model):
         related_name="services",
         verbose_name="Категория"
     )
+    id_1c = models.CharField(max_length=9, null=True)
     image = models.ImageField(upload_to="services/", null=True, blank=True, verbose_name="Изображение")
 
     def __str__(self):
