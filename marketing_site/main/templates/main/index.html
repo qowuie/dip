@@ -34,5 +34,40 @@
       </div>
     {% endif %}
   </div>
+
+  {% if matching_key_token %}
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        function waitForChatInit(callback) {
+          const checkInterval = setInterval(() => {
+            if (window.CollaborationSystemWebChat1CE) {
+              clearInterval(checkInterval);
+
+              // Передаём JWS токен
+              CollaborationSystemWebChat1CE.setMatchingKeyToken("{{ matching_key_token }}");
+
+              // Передаём контактную информацию
+              CollaborationSystemWebChat1CE.setContactInfo({
+                name: "{{ user.username }}",
+                fullName: "{{ user.get_full_name }}",
+                email: "{{ user.email }}",
+                phone: "{{ user.phone_number }}"
+              });
+
+              console.log("✅ Установлен JWS токен и контактная информация");
+            }
+          }, 300);
+        }
+
+        waitForChatInit();
+      });
+    </script>
+    {% endif %}
+
+
+
 </div>
+
+
+
 {% endblock %}

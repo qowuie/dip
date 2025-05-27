@@ -32,5 +32,9 @@
   <footer class="mt-10 py-6 border-t text-center text-sm text-gray-500">
     © {{ now|date:"Y" }} Маркетинговое агентство
   </footer>
+  {% if user.is_authenticated %}
+    <script async src = "https://integrations.1cdialog.com/integration/webchat/704510:CFK0eG1qXOg84GN5BVLlBvLradOHIOD3"></script>
+  {% endif %}
+
 </body>
 </html>
