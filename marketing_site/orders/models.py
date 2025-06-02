@@ -5,6 +5,17 @@ from accounts.models import CustomUser
 from main.models import Service
 
 
+class Employee(models.Model):
+    last_name = models.CharField(max_length=100)
+    first_name = models.CharField(max_length=100)
+    email = models.EmailField(blank=True)
+    phone = models.CharField(max_length=20, blank=True)
+    id_1c = models.CharField(max_length=9, unique=True)  # ID из 1С
+
+    def __str__(self):
+        return f"{self.last_name} {self.first_name}"
+
+
 class Order(models.Model):
     STATUS_CHOICES = [
         ('created', 'Создан'),
@@ -19,15 +30,7 @@ class Order(models.Model):
         related_name="client_orders"
     )
 
-    executor = models.ForeignKey(
-        CustomUser,
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        related_name="executor_orders",
-        verbose_name="Исполнитель",
-        limit_choices_to={'role': 'employee'}
-    )
+    executor = models.ForeignKey(Employee, on_delete=models.SET_NULL, null=True, blank=True)
 
     service = models.ForeignKey(
         Service,
@@ -56,3 +59,5 @@ class Order(models.Model):
 
     def get_phone_number(self):
         return self.client.phone_number if hasattr(self.client, 'phone_number') else 'Не указан'
+
+

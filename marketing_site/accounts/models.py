@@ -15,6 +15,7 @@ class CustomUser(AbstractUser):
 
     # Роль
     role = models.CharField(max_length=20, choices=ROLE_CHOICES, default='client')
+    id_1c = models.CharField(max_length=9, null=True)
 
     def __str__(self):
         return f"{self.get_full_name()} ({self.get_role_display()})"

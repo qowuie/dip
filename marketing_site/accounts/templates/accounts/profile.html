@@ -1,21 +1,40 @@
 {% extends 'base.html' %}
 {% block title %}Профиль{% endblock %}
+
 {% block content %}
 <div class="min-h-screen bg-gray-100 py-10">
   <div class="max-w-4xl mx-auto bg-white p-8 rounded-2xl shadow-md">
-    <h2 class="text-2xl font-bold mb-6">Мои заказы</h2>
+    <h2 class="text-3xl font-bold mb-8 text-gray-800">Мои заказы</h2>
     {% if orders %}
-      <div class="space-y-4">
+      <div class="space-y-6">
         {% for order in orders %}
-          <div class="border border-gray-300 rounded-xl p-4">
-            <p><strong>Услуга:</strong> {{ order.service.name }}</p>
-            <p><strong>Статус:</strong> {{ order.get_status_display }}</p>
-            <p><strong>Создан:</strong> {{ order.created_at|date:"d.m.Y H:i" }}</p>
+          <div class="relative">
+            <!-- Цветовая полоса -->
+            <div class="absolute top-0 left-0 h-full w-2 rounded-l-xl
+              {% if order.status == 'created' %}bg-gray-500
+              {% elif order.status == 'in_progress' %}bg-yellow-400
+              {% elif order.status == 'completed' %}bg-green-500
+              {% else %}bg-gray-300{% endif %}">
+            </div>
+
+            <!-- Карточка заказа -->
+            <div class="border border-gray-300 rounded-xl p-6 pl-8 bg-white shadow hover:shadow-md transition">
+              <p class="text-lg font-semibold text-gray-800"><strong>Номер услуги:</strong> {{ order.id }}</p>
+              <p class="text-lg font-semibold text-gray-800"><strong>Услуга:</strong> {{ order.service.name }}</p>
+              <p class="text-lg font-semibold text-gray-800"><strong>Статус:</strong> {{ order.get_status_display }}</p>
+              <p class="text-lg text-gray-700"><strong>Создан:</strong> {{ order.created_at|date:"d.m.Y H:i" }}</p>
+              {% if not order.executor %}
+                <p class="text-lg text-gray-700"><strong>Исполнитель:</strong> не назначен</p>
+              {% else %}
+                <p class="text-lg text-gray-700"><strong>Исполнитель:</strong> {{ order.executor.last_name }} {{ order.executor.first_name }}</p>
+              {% endif %}
+              <p class="text-lg text-gray-700"><strong>Комментарий:</strong> {{ order.wishes }}</p>
+            </div>
           </div>
         {% endfor %}
       </div>
     {% else %}
-      <p class="text-gray-600">У вас пока нет заказов.</p>
+      <p class="text-lg text-gray-600">У вас пока нет заказов.</p>
     {% endif %}
   </div>
 </div>

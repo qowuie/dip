@@ -49,7 +49,6 @@ INSTALLED_APPS = [
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': (
         'rest_framework.renderers.JSONRenderer',  # Только JSON (если не нужен browsable API)
-        #'rest_framework.renderers.BrowsableAPIRenderer',  # ← если хочешь красиво смотреть в браузере
     )
 }
 

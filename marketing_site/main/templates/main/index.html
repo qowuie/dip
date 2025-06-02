@@ -10,7 +10,7 @@
       <h2 class="text-xl font-semibold mb-4">{{ category.name }}</h2>
 
       <!-- Горизонтальный скролл с карточками -->
-      <div class="overflow-x-auto mb-10">
+      <div class="overflow-x-auto mb-10 hide-scrollbar">
         <div class="flex space-x-6 w-max">
           {% for service in category.services.all %}
             <div class="w-72 flex-shrink-0 bg-white border rounded-xl p-4 shadow hover:shadow-md transition">

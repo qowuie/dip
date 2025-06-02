@@ -1,13 +1,14 @@
 from rest_framework import serializers
 from accounts.models import CustomUser
 from orders.models import Order
+from orders.models import Employee
 from main.models import Service
 
 
 class ServiceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Service
-        fields = ['id', 'name', 'description', 'price']
+        fields = ['id', 'name', 'description', 'category', 'price', 'id_1c']
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -24,3 +25,9 @@ class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
         fields = ['id', 'client', 'executor', 'service', 'wishes', 'contact_method', 'status', 'created_at']
+
+
+class EmployeeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Employee
+        fields = ['id_1c', 'first_name', 'last_name', 'email', 'phone']

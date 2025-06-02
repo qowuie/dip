@@ -5,6 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% block title %}Маркетинг{% endblock %}</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .hide-scrollbar {
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none; /* IE и Edge */
+    }
+
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none; /* Chrome, Safari, Opera */
+    }
+  </style>
 </head>
 <body class="bg-gray-100 text-gray-900">
 
